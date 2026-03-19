@@ -29,7 +29,7 @@
 
 .single-task-container{
   display: grid;
-  grid-template-columns: auto 1fr auto auto auto auto;
+  grid-template-columns: auto auto  auto auto auto;
   gap: 12px;
   justify-items: start;
   align-items: center;
@@ -37,20 +37,28 @@
   border: 1px solid lightblue;
   border-radius: 10px;
   padding: 10px;
-
-
+  width: 100%;
 }
 
-.task-name-priority{
+
+.priority-container{
   border: 1px solid lightblue;
   border-radius: 10px;
   padding: 10px;
+  display: grid;
+  grid-template-columns: 30px auto auto  auto auto auto;
+  gap: 12px;
+  justify-items: start;
+  align-items: center;
+  margin: 15px;
+  width: 100%;
 }
 
 .task-btn{
   height: 30px;
   align-self: center;
   padding: 5px;
+  width: 50px;
 }
 
 .title{
@@ -102,11 +110,13 @@
   background-color: white;
 }
 
-.task-name, .task-date, .priority-task-name  {
+.task-name, .task-date{
   font-size: 20px;
   margin: 0;
   padding: 5px;
+  
 }
+
 
 
 .star{
@@ -129,8 +139,7 @@
     border: 1px solid transparent;
     border-radius: 10px;
     padding: 10px;
-    white-space: unset;
-}
+  }
   
 }
 
@@ -138,15 +147,15 @@
 @media (min-width: 768px) and (max-width: 1023px) {
 
   .section{
-  box-shadow: 3px 3px rgba(181, 226, 243, 0.218);
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: flex-start;
-  width: 100vw;
-  background-color:rgb(99, 177, 205);
-  border: 1px solid transparent;
-  border-radius: 10px;
-  padding: 10px;
-}
+    box-shadow: 3px 3px rgba(181, 226, 243, 0.218);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    width: 100vw;
+    background-color:rgb(99, 177, 205);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+  }
 }

@@ -149,9 +149,9 @@ function render(){
     } else {
 
       const htmlPriority = 
-        `<div class="task-name-priority single-task-container">
+        `<div class="priority-container">
           <p class="star">${star}</p>
-          <p class="priority-task-name">${name}</p> 
+          <p class="task-name">${name}</p> 
           <p class="task-date">${dueDateFormatted}</p> 
           <button 
           onclick="doneTasks.push(tasksToDo[${i}]);
