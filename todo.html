@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="body.css">
+    <link rel="stylesheet" href="start-section.css">
+    <link rel="stylesheet" href="main-sections.css">
+    <title>Task Manager</title>
+  </head>
+  <body>
+    <header>
+      <section class="start-section">
+        <p class="js-date info"></p>
+        <p class="js-hour info"></p>
+        <p class="js-weekday info"></p>
+      </section>
+    </header>
+    <main> 
+      
+      <section class="section-add-new section">
+      <h2 class="title">Add New Task</h2>
+      <input class="js-task-input" type="text"/>
+      <input class="js-date-input" type="date"/>
+      <div>
+      <button class="add-todo-btn btn" onclick="addToDo()">Add</button>
+      <button id="priority-toggle" class="priority-btn toggle-off btn btn" onclick="prioritybtn(); seeBtnToggle()">Priority</button>
+      </div> 
+      </section> 
+
+
+      <div class="container-1"> 
+      <section class="section-today-tasks section">
+      <h1 class="title">Today's Tasks</h1>
+      <div class="container-today-tasks">
+      </div>
+      </section>
+
+
+      <section class="section-future-tasks  section">
+        <h2 class="title">Future Tasks</h2>
+        <div class="container-future-tasks">
+        </div>
+      </section>
+      </div>
+      <div class="container-2"> 
+      <section class="section-overdue-tasks  section">
+        <h2 class="title">Overdue Tasks</h2>
+        <div class="container-overdue-tasks">
+        </div>
+      </section>
+
+      <section class="section-done-tasks  section">
+        <h2 class="title">Done Tasks</h2>
+        <div class="container-done-tasks">
+        </div>
+      </section>
+      </div>
+
+    </main>
+    <footer>
+
+    </footer>
+    <script src="todo.js"></script>
+  </body>
+  </html>
