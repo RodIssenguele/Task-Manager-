@@ -20,41 +20,44 @@
     <main> 
       
       <section class="section-add-new section">
-      <h2 class="title">Add New Task</h2>
-      <input class="js-task-input" type="text"/>
+      <h1 class="title">Add New Task</h2>
+      <form class="form">
+      <input placeholder="Add a task" class="js-task-input" id="text-input" type="text"/>
       <input class="js-date-input" type="date"/>
+      </form>
       <div>
-      <button class="add-todo-btn btn" onclick="addToDo()">Add</button>
-      <button id="priority-toggle" class="priority-btn toggle-off btn btn" onclick="prioritybtn(); seeBtnToggle()">Priority</button>
+      <button class="add-todo-btn" onclick="addToDo()">Add</button>
+      <button id="priority-toggle" class="priority-btn toggle-off " onclick="prioritybtn(); seeBtnToggle()">Priority</button>
       </div> 
       </section> 
 
 
       <div class="container-1"> 
       <section class="section-today-tasks section">
-      <h1 class="title">Today's Tasks</h1>
+      <h2 class="title">Today's Tasks</h1>
       
-      <div class="container-today-tasks">
+      <div class="container-today-tasks tasks-container">
       </div>
       </section>
 
 
       <section class="section-future-tasks  section">
         <h2 class="title">Future Tasks</h2>
-        <div class="container-future-tasks">
+        <div class="container-future-tasks tasks-container">
         </div>
       </section>
       </div>
+
       <div class="container-2"> 
       <section class="section-overdue-tasks  section">
         <h2 class="title">Overdue Tasks</h2>
-        <div class="container-overdue-tasks">
+        <div class="container-overdue-tasks tasks-container">
         </div>
       </section>
 
       <section class="section-done-tasks  section">
         <h2 class="title">Done Tasks</h2>
-        <div class="container-done-tasks">
+        <div class="container-done-tasks tasks-container">
         </div>
       </section>
       </div>

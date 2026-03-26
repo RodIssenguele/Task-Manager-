@@ -13,7 +13,6 @@ let date = '';
 // display memory calling function -----> 
 displayMemory();
 
-
 // start section function's ------>
 function updateClock(){
   const now = new Date();
@@ -90,7 +89,42 @@ function formatDate(date){
 
 
 
+// function to make the text input interactive ------> 
 
+function resizeInput(){
+  const input = document.getElementById("text-input");
+
+  
+
+  const mirror = document.createElement("span");
+  document.body.appendChild(mirror);
+
+  mirror.style.position = "absolute";
+  mirror.style.visibility = "hidden";
+  mirror.style.whiteSpace = "pre";
+  mirror.style.font = getComputedStyle(input).font;
+  mirror.style.letterSpacing = getComputedStyle(input).letterSpacing;
+  mirror.style.boxSizing = getComputedStyle(input).boxSizing;
+  mirror.style.padding = getComputedStyle(input).padding;
+
+  const updateSize = () => { 
+    mirror.textContent = input.value || input.placeholder || "";
+
+    const textWidth = mirror.offsetWidth;
+    const inputMinWidth = 300;  
+    input.style.width = Math.max(textWidth + 2, inputMinWidth) + "px";
+
+    
+     
+  } 
+
+  input.addEventListener("input", updateSize);
+  
+  updateSize();
+
+}
+
+resizeInput();
 
 
 
@@ -113,17 +147,18 @@ function render(){
 
   for(let i = 0; i < tasksToDo.length; i++){
 
-    const tasks = tasksToDo[i]; 
-    const name = tasks.name
-    const dueDate = tasks.dueDate;
+    const task = tasksToDo[i]; 
+    const name = task.name
+    const dueDate = task.dueDate;
     const dueDateFormatted = formatDate(dueDate) 
-    let prioritycheck = tasks.priority;
+    let prioritycheck = task.priority;
 
     if (prioritycheck === false){
     
       const html = `
-          <div class="single-task-container">
+        <div class="single-task-container">
           <p class="task-name">${name}</p> <p class="task-date">${dueDateFormatted}</p> 
+          <div class="btn-container">
           <button 
           onclick="doneTasks.push(tasksToDo[${i}]);
           tasksToDo.splice(${i}, 1);
@@ -134,14 +169,15 @@ function render(){
           </button>
           <button onclick="editTask(tasksToDo,${i})" class="edit-button task-btn btn">Edit</button>
           <button class="delete-button task-btn btn" onclick="tasksToDo.splice(${i}, 1); render(); setMemory();">Delete</button>
-          </div>`;
+          </div>  
+        </div>`;
 
   
       if(todayDate === dueDate){
           todayhtml += html;
         
         } else if(todayDate < dueDate){
-          futurehtml +=html;
+          futurehtml += html;
         
         } else{
           overduehtml += html;
@@ -150,9 +186,10 @@ function render(){
 
       const htmlPriority = 
         `<div class="priority-container">
-          <p class="star">${star}</p>
+          <span class="icon">${star}</span>
           <p class="task-name">${name}</p> 
           <p class="task-date">${dueDateFormatted}</p> 
+          <div class="btn-container">
           <button 
           onclick="doneTasks.push(tasksToDo[${i}]);
           tasksToDo.splice(${i}, 1);
@@ -163,7 +200,8 @@ function render(){
           </button>
           <button onclick="editTask(tasksToDo,${i})" class="edit-button task-btn btn">Edit</button>
           <button class="delete-button task-btn btn" onclick="tasksToDo.splice(${i}, 1); render(); setMemory();">Delete</button>
-         </div>`;
+          </div> 
+        </div>`;
 
   
       if(todayDate === dueDate){
@@ -206,9 +244,7 @@ function render(){
   document.querySelector('.container-overdue-tasks')
     .innerHTML = `${overdueCombinedHtml}`;
  }
-    
-  
-        
+      
 };
 
 
@@ -220,6 +256,7 @@ checktask();
 function checktask(){
 
   let textDone = '';
+  let complete = '✅';
   
   for (let i = 0; i < doneTasks.length; i++){
 
@@ -230,12 +267,15 @@ function checktask(){
     const dueDateFormatted = formatDate(date);
 
     const html = `
-    <div class="single-task-container">
-    <p class="task-name">${name} is Done</p>
-    <p class="task-date">${dueDateFormatted}</p>
-    <button onclick="editTask(doneTasks,${i})" class="edit-button task-btn btn">Edit</button>
-    <button class="delete-button task-btn btn" onclick="doneTasks.splice(${i}, 1); setMemory(); checktask(); ">Delete</button>
-    <button class="undone-button task-btn btn" onclick="tasksToDo.push(doneTasks[${i}]); doneTasks.splice(${i}, 1); setMemory(); render();  checktask();">Undo</button>
+    <div class="complete-task-container">
+      <span class="icon">${complete}</span>
+      <p class="task-name">${name}</p>
+      <p class="task-date">${dueDateFormatted}</p>
+      <div class="btn-container">
+      <button class="undone-button task-btn btn" onclick="tasksToDo.push(doneTasks[${i}]); doneTasks.splice(${i}, 1); setMemory(); render(); checktask();">Undo</button>
+      <button onclick="editTask(doneTasks,${i})" class="edit-button task-btn btn">Edit</button>
+      <button class="delete-button task-btn btn" onclick="doneTasks.splice(${i}, 1); setMemory(); checktask(); ">Delete</button>
+      </div>
     </div>`;
 
     textDone += html
@@ -262,7 +302,7 @@ let editingArray = null;
 
 function editTask(array, index){
 
-  
+  const inputTask = document.querySelector('.js-task-input');
   document.querySelector('.js-task-input').value = array[index].name ;
   document.querySelector('.js-date-input').value = array[index].dueDate;
   priority = array[index].priority;
@@ -272,6 +312,9 @@ function editTask(array, index){
   editingIndex = index;
  
   seeBtnToggle();
+
+  inputTask.style.width = 300 + "px";
+
 
 }
 
@@ -312,6 +355,7 @@ function addToDo(){
 
   const inputTask = document.querySelector('.js-task-input');
   const inputDate = document.querySelector('.js-date-input'); 
+  
 
   const name = inputTask.value;
   const dueDate = inputDate.value;
@@ -342,6 +386,9 @@ function addToDo(){
   setMemory();
   render();
   seeBtnToggle();
+
+  inputTask.style.width = 300 + "px";
+
 };
 
 
