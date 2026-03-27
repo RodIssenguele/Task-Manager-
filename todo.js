@@ -108,17 +108,22 @@ function resizeInput(){
   mirror.style.padding = getComputedStyle(input).padding;
 
   const updateSize = () => { 
+
+    if (window.innerWidth < 768){
+      input.style.width = "100%";
+      return;
+    }
+
     mirror.textContent = input.value || input.placeholder || "";
 
     const textWidth = mirror.offsetWidth;
     const inputMinWidth = 300;  
     input.style.width = Math.max(textWidth + 2, inputMinWidth) + "px";
 
-    
-     
   } 
 
   input.addEventListener("input", updateSize);
+  window.addEventListener("resize", updateSize);
   
   updateSize();
 
@@ -313,7 +318,7 @@ function editTask(array, index){
  
   seeBtnToggle();
 
-  inputTask.style.width = 300 + "px";
+  inputTask.style.width = "";
 
 
 }
@@ -387,7 +392,7 @@ function addToDo(){
   render();
   seeBtnToggle();
 
-  inputTask.style.width = 300 + "px";
+  inputTask.style.width = "";
 
 };
 

@@ -148,7 +148,16 @@ form{
   
 }
 
+.js-date-input{
+  width: 200px;
+  height:25px;
+  padding: 10px;
+  font-size: 15px;
+}
 
+.js-date-input:focus{
+  outline: none;
+}
 
 .icon{
   margin: 0;
@@ -201,6 +210,17 @@ form{
     font-size: 13px;
 
   }
+
+  .js-task-input{
+    max-width: 350px;
+  }
+
+  .js-date-input{
+    width: 150px;
+    height:20px;
+    padding: 10px;
+    font-size: 12px;
+  }
   
 }
 
@@ -247,4 +267,5 @@ form{
     font-size: 15px;
     margin: 0;
   }
+
 }
